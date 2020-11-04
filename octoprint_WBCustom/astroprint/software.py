@@ -36,6 +36,7 @@ from octoprint.events import eventManager, Events
 from octoprint_WBCustom.astroprint.boxrouter import boxrouterManager
 from octoprint_WBCustom.astroprint.ro_config import roConfig
 
+"""
 if platformStr == 'darwin-REMOVED':
 	import apt.debfile
 	import apt.progress.base
@@ -138,7 +139,7 @@ if platformStr == 'darwin-REMOVED':
 				self._lastTotalReported = self.total_items
 
 			return True
-
+ """
 class SoftwareUpdater(threading.Thread):
 	updatePhaseProgressInfo = {
 		"download":       		(0.0,		0.25, "Downloading package..."),
