@@ -5,7 +5,6 @@ __copyright__ = "Copyright (C) 2018 3DaGoGo, Inc - Released under terms of the A
 
 import os
 import yaml
-import flask
 
 from octoprint.settings import settings
 
@@ -15,6 +14,7 @@ _instance = None
 
 def roConfig(key):
 	global _instance
+	s = settings()
 
 	if _instance is None:
 
@@ -31,15 +31,16 @@ def roConfig(key):
 			}
 		}
 
-		return flask.make_response(settings().getConfigFolder(), 400)
+
+
 		#roFile = os.path.join(settings().getConfigFolder(),'ro-config.yaml')
-		""""
+		roFile = os.path.join(os.path.dirname(s._configfile),'ro-config.yaml')
 		with open(roFile,'r') as f:
 			config = yaml.safe_load(f)
 
 		merge_dict(defaults, config)
 		_instance = defaults
-		"""
+
 	v = _instance
 	for k in key.split('.'):
 		v = v[k]
