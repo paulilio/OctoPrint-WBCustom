@@ -30,13 +30,15 @@ def roConfig(key):
 			}
 		}
 
-		roFile = os.path.join(settings().getConfigFolder(),'ro-config.yaml')
+		return flask.make_response(settings().getConfigFolder(), 400)
+		#roFile = os.path.join(settings().getConfigFolder(),'ro-config.yaml')
+		""""
 		with open(roFile,'r') as f:
 			config = yaml.safe_load(f)
 
 		merge_dict(defaults, config)
 		_instance = defaults
-
+		"""
 	v = _instance
 	for k in key.split('.'):
 		v = v[k]
