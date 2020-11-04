@@ -11,7 +11,7 @@ import flask
 
 #from astroprint.network import NetworkManager
 #from .astroprint.network import NetworkManager
-from octoprint_WBCustom.astroprint.network.manager import NetworkManager
+from octoprint_WBCustom.astroprint.network import NetworkManager
 
 class WBCustomApi(octoprint.plugin.BlueprintPlugin):
     @octoprint.plugin.BlueprintPlugin.route("/echo", methods=["GET"])
