@@ -72,7 +72,7 @@ def handlePrinterSettings():
 
 @octoprint.plugin.BlueprintPlugin.route("/settings/network/name", methods=["GET", "POST"])
 #@api.route("/settings/network/name", methods=["GET", "POST"])
-@restricted_access
+#@restricted_access
 def handleNetworkName():
 	nm = networkManager()
 
