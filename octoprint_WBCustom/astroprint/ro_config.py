@@ -5,6 +5,7 @@ __copyright__ = "Copyright (C) 2018 3DaGoGo, Inc - Released under terms of the A
 
 import os
 import yaml
+import flask
 
 from octoprint.settings import settings
 
