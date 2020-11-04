@@ -70,7 +70,8 @@ def handlePrinterSettings():
 		}
 	})
 
-@api.route("/settings/network/name", methods=["GET", "POST"])
+@octoprint.plugin.BlueprintPlugin.route("/settings/network/name", methods=["GET", "POST"])
+#@api.route("/settings/network/name", methods=["GET", "POST"])
 @restricted_access
 def handleNetworkName():
 	nm = networkManager()
@@ -94,7 +95,7 @@ def getWifiNetworks():
 	if networks:
 		return jsonify(networks = networks)
 	else:
-		return jsonify({'message': "Unable to get WiFi networks oi"})
+		return jsonify({'message': "Unable to get WiFi networks"})
 
 @api.route("/settings/network", methods=["GET"])
 #@restricted_access
