@@ -1,0 +1,25 @@
+cloudSlicer:
+  loggedUser: paulilio.ferreira@gmail.com
+folder:
+  logs: /var/log/astrobox
+  timelapse: /AstroBoxFiles/timelapse
+  timelapse_tmp: /AstroBoxFiles/timelapse/tmp
+  uploads: /AstroBoxFiles/uploads
+  userPlugins: /AstroBoxFiles/plugins
+  watched: /AstroBoxFiles/watched
+serial:
+  baudrate: 250000
+  port: /dev/ttyACM0
+server:
+  firstRun: false
+  host: 127.0.0.1
+software:
+  lastCheck: 1603137305.02622
+system:
+  actions:
+  - action: shutdown
+    command: /usr/local/sbin/ab-shutdown
+  - action: reboot
+    command: /usr/local/sbin/ab-reboot
+wifi:
+  hotspotDevice: wlan1

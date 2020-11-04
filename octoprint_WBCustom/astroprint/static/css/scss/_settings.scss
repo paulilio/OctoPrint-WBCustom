@@ -1,0 +1,888 @@
+
+.row.container {
+  background: #fff;
+  border: $basic-border;
+  @include radius($global-radius);
+}
+
+.zebra {
+  background: url("/img/subtle_zebra_3d.png") 0 0 repeat;
+}
+
+#settings-view {
+  .element-list {
+    color: $base;
+    > .row {
+      padding: 2px 0;
+      background: lighten($iron, 14%);
+
+      &:nth-child(odd) {
+        background: $ghost;
+      }
+    }
+
+    .connected{color: $success-color;}
+
+    .inactive{
+      color: $base;
+
+      +.device-info,+.device-info +.device-info{color: $base;}
+    }
+
+    img.wifi.inactive{filter: grayscale(100%);}
+  }
+}
+
+#settings-side-bar {
+  background: white;
+  padding: 0;
+  height: 100%;
+  margin: 0;
+  border-right: $basic-border;
+
+  .side-nav {
+    padding-top: 0;
+    li {
+      font-size: rem-calc(15);
+      margin: 0;
+
+      a {
+        padding: 8px 20px 8px 50px;
+        color: $base;
+      }
+
+      &.heading {
+        //background: url("/img/subtle_zebra_3d.png") 0 0 repeat;
+        //border-bottom: 1px solid #ccc;
+        //border-top: $basic-border;
+        color: $charcoal;
+        font-size: rem-calc(19);
+        letter-spacing: 1.5px;
+        padding: 25px 15px 5px 15px;
+      }
+
+      &.heading:first-child {
+        border-top: none;
+      }
+
+      &.active {
+        a {
+          font-family: $font-family-bold;
+          color: $success-color;
+        }
+      }
+    }
+  }
+}
+
+#printer-connection {
+  label {
+    padding: 10px 0;
+    p {
+      font-family: $body-font-family;
+    }
+  }
+
+  .connection-status {
+    text-align: center;
+    background-size: 100% 5px;
+    box-shadow: inset 5px 5px 0 9px #000000;
+    background: $jet;
+    border-radius: 16px;
+    max-width: 470px;
+    margin: 40px auto 0 auto;
+
+    .arcade-backg{
+      background: linear-gradient(180deg,transparent 50%,rgba(89, 205, 144, 0.15) 51%);
+      background-size: 100% 5px;
+      border-radius: 16px;
+      min-height:85px;
+      @include flex(center, column);
+      letter-spacing: 1.5px;
+      padding-top: 10px;
+    }
+
+    span {
+      display: none;
+      font-size: rem-calc(20);
+    }
+  }
+
+  &.connecting {
+    span.connecting {
+      display: inline-block;
+      color: $success-color;
+    }
+
+    .loading-button {
+      &.connect,
+      &.reconnect,
+      &.disconnect {
+        display: none;
+      }
+    }
+  }
+
+  &.failed {
+    span.failed {
+      display: inline-block;
+      color: #ff604c;
+    }
+
+    .loading-button {
+      &.disconnect,
+      &.reconnect,
+      &.cancel {
+        display: none;
+      }
+    }
+  }
+
+  &.connected {
+    span.connected {
+      display: inline-block;
+      color: #4dd1b1;
+    }
+
+    .loading-button {
+      &.connect,
+      &.cancel {
+        display: none;
+      }
+    }
+  }
+
+  &.closed {
+    .loading-button {
+      &.disconnect,
+      &.reconnect,
+      &.cancel {
+        display: none;
+      }
+    }
+  }
+}
+
+#printer-profile {
+
+  .save-profile .loading-button > button{
+    margin-bottom: 0;
+    box-shadow: inset 0px -6px rgba(0, 0, 0, 0.08);
+  }
+  .toggle {
+    .side-label {
+      vertical-align: top;
+      font-size: rem-calc(10);
+      max-width: 34px;
+      line-height: 120%;
+      display: inline-block;
+    }
+
+    .switch {
+      label {
+        margin-bottom: 1rem;
+        background: #666;
+      }
+    }
+  }
+
+  input + label[for=heated-bed]{margin-bottom: 1rem;}
+
+  .change-printer{
+    width: auto;
+    max-width: 270px;
+    margin-bottom: 10px;
+
+    &.icon-button{
+      padding: 10px;
+      background: transparent;
+      color:$green;
+      box-shadow: none;
+
+      i{color:$green; font-size: rem-calc(20);}
+    }
+  }
+
+  .movement {
+    margin: 20px auto;
+    border-radius: 15px;
+    padding: 10px 0 0 0;
+    background: darken($ghost,2%);
+
+    i {
+      font-size: rem-calc(30);
+      vertical-align: middle;
+    }
+  }
+}
+
+#filament-info{
+  .icon-filament:before{
+    font-size: 80px;
+    position: relative;
+    top: 8px;
+    margin: 10px auto 0 auto;
+    display: block;
+    text-shadow: 2px 1px 4px rgb(0, 0, 0);
+  }
+
+  #filament-name{margin-bottom: 20px;}
+
+  .button{
+    min-width: 110px;
+    letter-spacing: 1px;
+
+    &.dark{
+      background: #505050;
+    }
+  }
+}
+
+#filament-selector-modal{
+  @include reveal-modal-base(false,  320px); //this sets max-width: 320px
+
+  .content{padding: 12px;}
+  .more-colors{
+    position: relative;
+    display: inline-block;
+    margin-top: 20px;
+    cursor: pointer;
+    padding-left: 0;
+
+    &:hover{opacity: 0.8;}
+
+    #filament_color{
+      padding: 0;
+      border: 0;
+      margin: 0;
+      box-shadow: none;
+      border-radius: $global-radius;
+      display: inline-block;
+      vertical-align: middle;
+      width: 100%;
+      height: 42px;
+    }
+
+    i{
+      display: inline-block;
+      vertical-align: middle;
+      font-size: 22px;
+      border: 1px solid;
+      padding: 4px 1px;
+      color: #898989;
+      border-radius: $global-radius;
+      position: absolute;
+      top: 4px;
+      background: white;
+      right: 11px;
+      height: 34px;
+      pointer-events: none;
+    }
+  }
+  .paletecolor{
+    display: inline-block;
+    width: 28px;
+    height: 28px;
+    border-radius: $global-radius;
+    box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    margin:6px;
+
+    &:hover{opacity: 0.85;}
+    &:active{
+      opacity: 1;
+      transform: scale(0.92);
+    }
+  }
+}
+
+#wifi-network-list-modal {
+  table {
+    max-width: 100%;
+    border: none;
+
+    button, .button {
+      margin-bottom: 0;
+    }
+
+    td {
+
+      img{width: 22px; margin: 0 4px;}
+
+      i{vertical-align: middle;}
+
+      &.network-name {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
+
+      .active-network {
+        padding: 5px;
+        text-align: center;
+        color: $success-color;
+      }
+    }
+  }
+}
+
+#wifi-hotspot {
+    .icon-attention {
+        color: $alert-color;
+        font-size: rem-calc(36);
+    }
+    .no-hotspot {
+        h4 {
+            color: $steel;
+        }
+    }
+}
+
+#internet-connection {
+  h3{
+    font-size: 20px;
+  }
+
+  h5{
+    margin: 15px auto 5px;
+  }
+
+  i {
+    color: $success-color;
+  }
+
+  .icon-ethernet{
+    font-style: normal;
+
+    &::before{font-size: 21px;}
+  }
+
+  img.wifi{
+    height: 23px;
+    margin:0 4px;
+    vertical-align: top;
+  }
+
+  .device-info{
+    font-size: rem-calc(15);
+    letter-spacing: 1px;
+    padding-left: 36px;
+  }
+
+  .connection {
+    padding: 10px 0;
+
+    .connected{color: $success-color;}
+
+    .not-connected{
+      color: $alert-color;
+      img{
+        height: 17px;
+        margin-right: 8px;
+      }
+    }
+
+    .ip-address {
+      font-size: rem-calc(15);
+      color: $charcoal;
+      letter-spacing: 1px;
+      padding-left: 33px;
+    }
+  }
+
+  .hotspot-off {
+    padding: 15px 0;
+
+    label {
+      font-size: rem-calc(18);
+      line-height: 1.2em;
+    }
+  }
+
+  .stored-wifis {
+    padding: 16px;
+    > .row {
+      .name {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        padding-top: 10px;
+      }
+
+      img{margin-top: 10px;}
+
+      .action{padding: 0;}
+
+      .action i {
+        color: $alert-color;
+        font-size: 28px;
+      }
+
+      .active i {
+        visibility: hidden;
+      }
+
+      &.active {
+        .active i {
+          visibility: inherit;
+        }
+      }
+    }
+  }
+}
+
+#delete-stored-wifi-modal {
+  .active {
+    display: none;
+  }
+
+  &.active {
+    .active {
+      display: block
+    }
+  }
+}
+
+#network-name {
+  .preview {
+    color: #ccc;
+    font-size: rem-calc(16);
+    text-align: left;
+    padding-left: 10px;
+
+    li {
+      margin-bottom: 5px;
+      list-style: none;
+    }
+
+    span.bold, i {
+      color: $success-color;
+    }
+  }
+}
+
+#video-stream {
+
+    button, .button {
+        margin-bottom: 0;
+    }
+
+    .error-message {
+        border: 3px dashed $base;
+        background: #efefef;
+        padding: 15px;
+        @include radius($global-radius);
+
+        p {
+            color: $steel;
+            &:last-child {
+                margin: 0;
+            }
+        }
+    }
+
+    .icon-attention{
+        font-size: 36px;
+        color: $red;
+    }
+
+    div.field-value {
+      margin-bottom: 20px;
+      margin-top: -10px;
+    }
+}
+
+#software-update-modal {
+  h2 span {
+    color: black;
+  }
+
+  .package-info {
+    background-color: #fafafa;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    @include radius($global-radius);
+
+    h4 {
+      font-size: 16px;
+
+      i {
+        font-size: 25px;
+        vertical-align: middle;
+
+        &.icon-ok-circled {
+          color: $success-color;
+        }
+
+        &.icon-attention {
+          color: $alert-color;
+        }
+      }
+    }
+
+    ul {
+      margin: 0px;
+
+      li {
+        list-style: none;
+
+        &.rel-notes {
+          margin-top: 10px;
+
+          > div {
+            padding-top: 5px;
+            font-size: 13px;
+          }
+        }
+      }
+    }
+  }
+}
+
+#software-update {
+  h4 {
+    line-height: 1em;
+
+    small {
+      color: #ccc;
+      -moz-user-select: initial;
+        -webkit-user-select: initial;
+        -ms-user-select: initial;
+        user-select: inital;
+    }
+
+    margin-bottom: 20px;
+  }
+
+  .additional-sw-container {
+    background-color: #fafafa;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    @include radius($global-radius);
+
+    h3{
+      text-align: left;
+      font-size: 15px;
+    }
+
+    ul {
+      text-align: left;
+      margin: 0px;
+
+      li {
+        list-style: none;
+        font-size: 12px;
+      }
+    }
+  }
+}
+
+#software-plugins {
+  .file-upload-view {
+    position: relative;
+
+    input[type=file] {
+      opacity: 0;
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      cursor: pointer;
+    }
+  }
+
+  .upload-progress {
+    .progress-message {
+      font-size: rem-calc(18);
+      color: $success-color;
+    }
+
+    .meter {
+      transition: width 1s;
+    }
+  }
+
+  .installed {
+    > .row {
+      .name {
+        padding-top: 10px;
+        .version {
+          font-size: rem-calc(12);
+          color: #ccc;
+        }
+
+        .icon-ok-circled {
+          color: $success-color;
+        }
+      }
+
+      .icon-trash {
+        color: $alert-color;
+        font-size: 26px;
+      }
+    }
+
+    .empty {
+      text-align: center;
+      color: #ccc;
+
+      i {
+        display: block;
+        font-size: rem-calc(80);
+      }
+    }
+  }
+}
+
+#ssl-settings {
+  .ssl-domain-name {
+    margin-bottom: 0;
+  }
+}
+
+#software-license {
+  .license-info {
+    display: table;
+
+    h1 {
+      height: 80px;
+      font-size: 30px;
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+    }
+
+    .certificate-icon {
+      position: relative;
+      height: 100px;
+      line-height: 100px;
+      text-align: center;
+      width: 140px;
+
+      .status-icon {
+        position: absolute;
+        top:0;
+        left:0;
+        right: 0;
+        bottom: 0;
+      }
+
+      i {
+        font-size: 60px;
+        color: lighten($iron, 8%);
+
+        &.ok, &.nok {
+          display: none;
+          font-size: 26px;
+        }
+
+        &.ok {
+          color: $success-color;
+        }
+
+        &.nok {
+          color: $warning-color;
+        }
+      }
+    }
+
+    &.ok {
+      .certificate-icon i.ok {
+        display: inline;
+      }
+    }
+
+    &.nok {
+      .certificate-icon i.nok {
+        display: inline;
+      }
+    }
+
+    ul {
+      list-style: none;
+      margin: 0;
+    }
+  }
+}
+
+.settings-page {
+  padding: 20px;
+
+  label {
+    font-size: rem-calc(16);
+    margin-bottom: 3px;
+    //font-family: $font-family-normal;
+  }
+
+  .serial-container {
+    padding-top: 15px;
+    border-top: 1px dotted #ccc;
+
+    div {
+      padding: 0;
+    }
+
+    label {
+      text-align: left;
+      font-size: rem-calc(18);
+
+      i {
+        color: $alert-color;
+      }
+    }
+  }
+}
+
+#software-advanced {
+  .apiKey {
+    -webkit-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+    user-select: text;
+  }
+
+  .apikey-regenerate {
+    margin-top: 10px;
+    border-top: 1px dotted #ccc;
+
+    padding: 15px 0;
+
+    label {
+      text-align: left;
+      font-size: rem-calc(18);
+      line-height: 1.4em;
+    }
+  }
+}
+
+#software-storage,
+#software-logs  {
+  .element-list {
+    margin-top: 20px;
+
+    .row {
+      padding: 10px 0px;
+
+      &.bold {
+        font-size: 23px;
+        border-top: 2px solid;
+      }
+
+      .icon-trash {
+        color: $alert-color;
+        font-size: 20px;
+      }
+    }
+  }
+}
+
+#temperature-presets{
+
+  h5{
+    color: $base;
+    letter-spacing: 1px;
+    padding: 2px 15px;
+    margin-top: 20px;
+    border-bottom: 2px solid #f4f4f4;
+    line-height: 120%;
+    font-size: 16px;
+  }
+
+  .new-preset button{
+    letter-spacing: 1px;
+    box-shadow: inset 0 -5px 0 0px rgba(0, 0, 0, 0.15);
+    -moz-box-shadow: inset 0 -5px 0 0px rgba(0, 0, 0, 0.15);
+    margin: 10px auto 0 auto;
+  }
+
+  img{
+    height: 26px;
+    filter: grayscale(100%);
+    opacity: 0.2;
+    position: absolute;
+    top: 5px;
+    left: 0;
+    width: 100%;
+
+    &.icon-extruder{
+      height: 35px;
+    }
+
+    &.icon-bed{
+      top: 8px;
+    }
+  }
+
+  .extruder-temp,.bed-temp{
+    position: relative;
+    padding-top: 5px;
+
+    b{
+      width: 100%;
+      color: #f05151;
+      font-size: 18px;
+      margin-left: 2px;
+    }
+  }
+
+  a{
+    font-size: 29px;
+    border: 0;
+    color: #333333;
+
+    &.delete-preset{
+      color: #f05151;
+    }
+  }
+
+  .no-padding{
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    border-left: 1px dotted #cccccc;
+  }
+}
+
+#preset-form{
+  label{margin-top: 10px;}
+
+  img{
+    max-width: 30px;
+    padding-top: 6px;
+    margin-right: 10px;
+
+    &.icon-bed{
+      max-width: 38px;
+    }
+  }
+}
+
+
+@media #{$small-only} {
+  #settings-view {
+    .settings-page.hide {
+      display: block;
+    }
+  }
+
+  .zebra h1 {
+    margin: 0;
+    margin-bottom: 1px;
+    padding: 5px 0;
+    border-bottom: 1px solid #ccc;
+    font-size: rem-calc(18);
+  }
+
+  .zebra.software h1 {
+    margin: 0;
+    border: none;
+  }
+
+  #temperature-presets .stored-presets{margin: 0 -20px;}
+
+}

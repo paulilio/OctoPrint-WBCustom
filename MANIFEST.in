@@ -1,0 +1,4 @@
+include README.md
+recursive-include octoprint-wb-custom /templates *
+recursive-include octoprint-wb-custom /translations *
+recursive-include octoprint-wb-custom /static *

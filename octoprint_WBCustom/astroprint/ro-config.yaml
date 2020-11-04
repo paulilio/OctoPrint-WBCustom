@@ -1,0 +1,4 @@
+cloud:
+  apiHost: https://api.astroprint.com
+  apiClientId: fb94baf17f8246d687c7b90e130231cd
+  boxrouter: wss://boxrouter.astroprint.com

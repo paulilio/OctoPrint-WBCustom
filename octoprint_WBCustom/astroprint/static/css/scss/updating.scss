@@ -1,0 +1,141 @@
+@charset "UTF-8";
+
+@import
+	"fonts",
+	"normalize",
+	"fontello",
+  "animations",
+	"foundation/settings",
+	"foundation/components/grid",
+	"foundation/components/buttons",
+	"foundation/components/progress-bars",
+	"common-main",
+	"widgets";
+
+body {
+	background: black;
+	height: 100%;
+	width: 100%;
+}
+
+.icon-rocket {
+  color: white;
+  font-size: 70px;
+}
+
+.info {
+	background: #dbd7d5;
+	margin-top: 60px;
+	padding: 20px 40px;
+	@include radius($global-radius);
+
+	p {
+		font-size: rem-calc(18);
+
+		i.icon-attention {
+			color: $alert-color;
+		}
+	}
+
+	.release-notes {
+		font-size: rem-calc(14);
+	}
+
+	button,
+  .button {
+		font-size: rem-calc(26);
+	}
+}
+
+.progress-info {
+	padding: 0 20px;
+
+	h1, h3 {
+		color: white;
+		line-height: 1.3em;
+	}
+
+	.progress {
+		height: 25px;
+		width: 100%;
+		background: transparent;
+		border-color: #bbb;
+
+		.meter {
+			transition: width 1s;
+		}
+	}
+}
+
+.error {
+	margin-top: 60px;
+	padding: 20px;
+	background: #dbd7d5;
+	@include radius($global-radius);
+
+	h1 {
+		font-size: rem-calc(36);
+		color: $body-font-color;
+		margin: 0;
+	}
+
+	p {
+		font-size: rem-calc(22);
+		line-height: 1.5em;
+
+		i.icon-attention {
+			color: $alert-color;
+		}
+	}
+
+	button,
+  .button {
+		font-size: rem-calc(25);
+	}
+}
+
+#updating-view {
+  .icon-ok-circled {
+    color: $success-color;
+  }
+
+  .done,
+  .error,
+  .info {
+    display: none;
+  }
+
+  &.done {
+    .updating {
+      display: none
+    }
+
+    .done {
+      display: block;
+    }
+  }
+
+  &.failed {
+    .progress-info {
+      display: none;
+    }
+
+    .error {
+      display: inherit;
+    }
+
+    .updating {
+      display: none;
+    }
+  }
+
+  &.forced {
+    .progress-info {
+      display: none;
+    }
+
+    .info {
+      display: block;
+    }
+  }
+}

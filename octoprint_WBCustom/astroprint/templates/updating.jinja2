@@ -1,0 +1,108 @@
+{% extends 'base.jinja2' %}
+
+{% block css %}
+  {% assets filters="scss", output="css/gen/updating.css",
+    "css/scss/updating.scss" %}
+    <link rel="stylesheet" type="text/css" href="{{ ASSET_URL }}" />
+  {% endassets %}
+{% endblock %}
+
+{% block content %}
+{% set showForcedInfo = forceUpdateInfo and status == 'idle' %}
+<div id="updating-view" class="row {{status}} {%- if showForcedInfo %} forced {%- endif %}">
+  {% if showForcedInfo %}
+    <div class="small-12 medium-11 large-8 medium-centered large-centered columns info">
+      <h1 class="bold" align="center">System Update</h1>
+      <p>
+        <i class="icon-attention"></i> Your software is currently out of date and needs to be
+        updated in order to continue using your {{mfDefinition.variant.product_name}}.
+      </p>
+      <p><b>Version</b>: {{ forceUpdateInfo['major'] }}.{{ forceUpdateInfo['minor'] }}({{ forceUpdateInfo['build'] }})</p>
+      <p><b>Release Date</b>: {% if forceUpdateInfo['date'] -%} {{ forceUpdateInfo['date'].strftime('%b %d, %Y') }} {%- else -%} No published {%- endif %}</p>
+      <p>
+        <b>Release Notes:</b>
+        <div class="release-notes">
+          {{ forceUpdateInfo['release_notes'] }}
+        </div>
+      </p>
+      <center>
+        <div class="loading-button">
+          <button class="success radius bold">Install Now</button>
+          <span class="loading button bold success disabled radius">
+            <i class="icon-rocket-spinner animate-spin"></i> Initiating...
+          </span>
+          <span class="failed button alert bold disabled radius"><i class="icon-attention"></i> Failed</span>
+        </div>
+      </center>
+    </div>
+  {% endif %}
+
+  <div class="small-12 columns progress-info">
+    <div align="center">
+      <i class="icon-rocket"></i>
+    </div>
+    <h1 class="bold updating" align="center">Software Update in Progress <i class="icon-refresh animate-spin"></i></h1>
+    <h1 class="bold done" align="center"><i class="icon-ok-circled"></i> Software Update Completed</h1>
+    <div class="progress success round">
+      <span class="meter" style="width:0%"></span>
+    </div>
+    <h3 align="center" class="message updating">Downloading release...</h3>
+    <div align="center" class="reboot-container done">
+      <div class="loading-button">
+        <button class="secondary reboot radius">Reboot</button>
+        <span class="button radius secondary disabled loading"><i class="icon-refresh animate-spin"></i> Rebooting...</span>
+        <span class="button radius alert disabled failed"><i class="icon-attention"></i> Failed to Reboot</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="small-12 medium-11 medium-centered large-8 large-centered columns error">
+    <h1 class="bold" align="center">System Update Failed</h1>
+    <p>
+      <i class="icon-attention"></i> An error occured and your {{mfDefinition.variant.product_name}} was unable to
+      complete the update.
+    </p>
+    <div class="row">
+      <div class="small-12 medium-6 columns">
+        <div class="loading-button expand">
+          <button class="expand radius secondary bold close">Close</button>
+          <span class="loading button secondary bold expand disabled radius">
+            <i class="icon-refresh animate-spin"></i> Closing...
+          </span>
+          <span class="failed button alert bold expand disabled radius"><i class="icon-attention"></i> Failed</span>
+        </div>
+      </div>
+      <div class="small-12 medium-6 columns">
+        <div class="loading-button expand">
+          <button class="expand radius success bold retry">Retry</button>
+          <span class="loading button success bold expand disabled radius">
+            <i class="icon-rocket-spinner animate-spin"></i> Initiating...
+          </span>
+          <span class="failed button alert bold expand disabled radius"><i class="icon-attention"></i> Retry Failed</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block js %}
+  <script type="text/javascript">
+    var UI_API_KEY = "{{ uiApiKey }}";
+    var BASEURL = "{{ url_for('index') }}";
+    var API_BASEURL = BASEURL + "api/";
+    var SOCKJS_URI = window.location.protocol.slice(0, -1) + "://" + (window.document ? window.document.domain : window.location.hostname) + ":" + window.location.port + "/sockjs";
+    var RELEASE_IDS = {{ releases | tojson }};
+    var WS_TOKEN = "{{ wsToken }}";
+    var updateInfo = {
+      'progress': {{ lastCompletionPercent or 'null' }},
+      'message': "{{ lastMessage or '' }}"
+    }
+  </script>
+  {% assets filters="closure_js", output="js/gen/updating.js",
+    "js/lib/jquery.js", "js/lib/underscore.js", "js/lib/backbone.js", "js/lib/sockjs.js", "js/lib/fastclick.js", "js/updating/updating.js" -%}
+      <script type="text/javascript" src="{{ ASSET_URL }}"></script>
+  {%- endassets %}
+  <script type="text/javascript">
+  </script>
+{% endblock %}

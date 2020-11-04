@@ -1,0 +1,97 @@
+html {
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+}
+
+body {
+	background: url('/img/subtle_dots_v1.png');
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select:none;
+  user-select:none;
+  letter-spacing: 0.3px;
+
+  .can-select {
+    -moz-user-select: text;
+    -webkit-user-select: text;
+    -ms-user-select: text;
+    user-select: text;
+  }
+}
+
+b,
+strong,
+.bold {
+  font-family: "nexa_boldregular", Helvetica, Arial, sans-serif;
+}
+
+.reveal-modal-bg {
+	position: fixed;
+}
+
+.progress-container{
+  .progress-label{
+    color: $charcoal;
+    letter-spacing: 1px;
+    font-size: 20px;
+  }
+}
+
+.progress{
+  .meter{border-radius: $global-radius;}
+}
+
+.reveal-modal {
+  padding: 0;
+
+  .reveal-content{padding: 20px 20px 10px 20px}
+
+  h2 {
+    width: 100%;
+    text-align: center;
+    background-color: $success-color;
+    color: white;
+    font-size: rem-calc(22);
+    padding: 15px 40px;
+    margin: 0;
+  }
+
+  .modal-body {
+    margin: 10px $column-gutter;
+
+    p {
+      text-align: left;
+    }
+  }
+
+  .close-reveal-modal {
+    color: white;
+  }
+
+  .modal-content {
+    padding: 20px;
+  }
+
+  .modal-actions {
+    padding: 0px 20px;
+  }
+}
+/* Badges used for information */
+.badge {
+  position:relative;
+}
+.badge[data-badge]:after {
+  content:attr(data-badge);
+  position:absolute;
+  top:-3px;
+  left:36px;
+  font-size:.8em;
+  font-weight: bold;
+  background:#F05151;
+  color:white;
+  width:20px;height:20px;
+  text-align:center;
+  line-height:20px;
+  border-radius:50%;
+  font-family: monospace;font-style: normal;
+}
