@@ -35,7 +35,7 @@ def roConfig(key):
 
 		#roFile = os.path.join(settings().getConfigFolder(),'ro-config.yaml')
 		#roFile = os.path.join(os.path.dirname(s._configfile),'ro-config.yaml')
-		roFile = os.path.join(os.path.realpath(),'ro-config.yaml')
+		roFile = os.path.join(os.path.dirname(os.path.realpath()),'ro-config.yaml')
 		with open(roFile,'r') as f:
 			config = yaml.safe_load(f)
 
