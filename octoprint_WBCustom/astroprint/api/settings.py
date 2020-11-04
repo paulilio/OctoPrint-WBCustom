@@ -94,7 +94,7 @@ def getWifiNetworks():
 	if networks:
 		return jsonify(networks = networks)
 	else:
-		return jsonify({'message': "Unable to get WiFi networks"})
+		return jsonify({'message': "Unable to get WiFi networks oi"})
 
 @api.route("/settings/network", methods=["GET"])
 #@restricted_access
