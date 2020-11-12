@@ -7,7 +7,7 @@ __copyright__ = "Copyright (C) 2020 Paulilio Castello Branco - Released under te
 
 
 import octoprint.plugin
-from flask import request, abort, jsonify, make_response
+from flask import flask, request, abort, jsonify, make_response
 
 #from astroprint.network import NetworkManager
 #from .astroprint.network import NetworkManager
