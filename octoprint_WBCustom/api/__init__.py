@@ -16,9 +16,9 @@ from octoprint_WBCustom.astroprint.network.manager import networkManager
 class WBCustomApi(octoprint.plugin.BlueprintPlugin):
     @octoprint.plugin.BlueprintPlugin.route("/echo", methods=["GET"])
     def myEcho(self):
-        if not "text" in flask.request.values:
-            return flask.make_response("Expected a text to echo back.", 400)
-        return flask.request.values["text"]
+        if not "text" in request.values:
+            return make_response("Expected a text to echo back.", 400)
+        return request.values["text"]
 
     #@api.route("/settings/network/wifi-networks", methods=["GET"])
     @octoprint.plugin.BlueprintPlugin.route("/wifi", methods=["GET"])
