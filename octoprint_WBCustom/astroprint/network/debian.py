@@ -12,7 +12,7 @@ import time
 import octoprint_WBCustom.ext.pynetworkmanager.NetworkManager as NetworkManager
 
 from dbus.exceptions import DBusException
-from gi.repository import GObject
+from gi.repository import GObject as gobject
 
 from octoprint_WBCustom.astroprint.network import NetworkManager as NetworkManagerBase
 
