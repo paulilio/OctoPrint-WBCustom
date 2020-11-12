@@ -12,7 +12,7 @@ import logging
 import logging.config
 import tornado.wsgi
 
-from ext.sockjs.tornado import SockJSRouter
+from octoprint_WBCustom.ext.sockjs.tornado import SockJSRouter
 from flask import Flask, render_template, send_from_directory, make_response, Response, request, abort
 from flask_login import LoginManager, current_user, logout_user
 from flask_principal import Principal, Permission, RoleNeed, identity_loaded, UserNeed

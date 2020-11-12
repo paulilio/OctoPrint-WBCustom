@@ -9,7 +9,7 @@ import os
 import threading
 import time
 
-import ext.pynetworkmanager.NetworkManager as NetworkManager
+import octoprint_WBCustom.ext.pynetworkmanager.NetworkManager as NetworkManager
 
 from dbus.exceptions import DBusException
 from gi.repository import GObject

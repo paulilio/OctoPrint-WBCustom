@@ -9,7 +9,7 @@ from tornado.httpclient import AsyncHTTPClient, HTTPRequest
 from flask import url_for, make_response, request, current_app
 from flask_login import login_required, login_user, current_user
 from werkzeug.utils import redirect
-from ext.sockjs.tornado import SockJSConnection
+from octoprint_WBCustom.ext.sockjs.tornado import SockJSConnection
 from itsdangerous import base64_decode
 
 import datetime
