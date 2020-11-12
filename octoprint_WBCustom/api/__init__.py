@@ -11,7 +11,7 @@ import flask
 
 #from astroprint.network import NetworkManager
 #from .astroprint.network import NetworkManager
-from octoprint_WBCustom.astroprint.network import NetworkManager
+#from octoprint_WBCustom.astroprint.network import NetworkManager
 
 class WBCustomApi(octoprint.plugin.BlueprintPlugin):
     @octoprint.plugin.BlueprintPlugin.route("/echo", methods=["GET"])
@@ -22,7 +22,7 @@ class WBCustomApi(octoprint.plugin.BlueprintPlugin):
 
     #@api.route("/settings/network/wifi-networks", methods=["GET"])
     @octoprint.plugin.BlueprintPlugin.route("/wifi", methods=["GET"])
-	def getNetworkSettings(self):
+    def getNetworkSettings(self):
 		nm = networkManager()
 
 		return jsonify({
