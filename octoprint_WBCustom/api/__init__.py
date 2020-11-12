@@ -7,11 +7,11 @@ __copyright__ = "Copyright (C) 2020 Paulilio Castello Branco - Released under te
 
 
 import octoprint.plugin
-import flask
+from flask import request, abort, jsonify, make_response
 
 #from astroprint.network import NetworkManager
 #from .astroprint.network import NetworkManager
-#from octoprint_WBCustom.astroprint.network import NetworkManager
+from octoprint_WBCustom.astroprint.network import NetworkManager
 
 class WBCustomApi(octoprint.plugin.BlueprintPlugin):
     @octoprint.plugin.BlueprintPlugin.route("/echo", methods=["GET"])
