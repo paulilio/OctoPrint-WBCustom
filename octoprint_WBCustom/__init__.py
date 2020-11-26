@@ -11,7 +11,7 @@ class WBCustomPlugin(octoprint.plugin.StartupPlugin,
     def on_after_startup(self):
         self._logger.info("WBCustomPlugin!")
 
-__plugin_name__ = "WB Custom"
+__plugin_name__ = "WBCustom"
 __plugin_version__ = "1.0.0"
 __plugin_description__ = "Plugin da empresa WB"
 __plugin_pythoncompat__ = ">=2.7,<4"
