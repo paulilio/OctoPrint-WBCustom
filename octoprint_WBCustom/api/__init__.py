@@ -23,7 +23,7 @@ class WBCustomApi(octoprint.plugin.BlueprintPlugin):
     #@api.route("/settings/network/wifi-networks", methods=["GET"])
     @octoprint.plugin.BlueprintPlugin.route("/wifi", methods=["GET"])
     def getNetworkSettings(self):
-		nm = networkManager()
+		nm = networkManager
 
 		return jsonify({
 			'networks': nm.getActiveConnections(),
