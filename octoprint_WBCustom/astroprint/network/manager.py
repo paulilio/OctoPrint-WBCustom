@@ -22,7 +22,7 @@ def networkManager():
 				# we can't use a map as some of the import from the driver instances only
 				# exists in their environments
 
-				roConfig('network.manager')
+				driver = roConfig('network.manager')
 				#driver = roConfig().get(['network', 'manager'])
 				#driver = "debianNetworkManager"
 
