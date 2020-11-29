@@ -16,12 +16,13 @@ def networkManager():
 		with creationLock:
 			if _instance is None:
 				#from octoprint_WBCustom.octoprint.settings import settings
+				from octoprint_WBCustom.astroprint.settings import settings
 
 				# we can't use a map as some of the import from the driver instances only
 				# exists in their environments
 
-				#driver = settings().get(['network', 'manager'])
-				driver = "debianNetworkManager"
+				driver = settings().get(['network', 'manager'])
+				#driver = "debianNetworkManager"
 
 				if driver == 'debianNetworkManager':
 					from octoprint_WBCustom.astroprint.network.debian import DebianNetworkManager

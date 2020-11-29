@@ -23,3 +23,9 @@ system:
     command: /usr/local/sbin/ab-reboot
 wifi:
   hotspotDevice: wlan1
+  hotspotOnlyOffline: True
+network:
+  manager: debianNetworkManager
+  interface: wlan0
+  ssl:
+    - domain: None
