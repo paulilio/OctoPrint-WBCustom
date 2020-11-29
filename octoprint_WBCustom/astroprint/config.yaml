@@ -17,9 +17,15 @@ software:
   lastCheck: 1603137305.02622
 system:
   actions:
-  - action: shutdown
-    command: /usr/local/sbin/ab-shutdown
-  - action: reboot
-    command: /usr/local/sbin/ab-reboot
+    - action: shutdown
+      command: /usr/local/sbin/ab-shutdown
+    - action: reboot
+      command: /usr/local/sbin/ab-reboot
 wifi:
   hotspotDevice: wlan1
+  hotspotOnlyOffline: True
+network:
+  manager: debianNetworkManager
+  interface: wlan0
+  ssl:
+    - domain: None
