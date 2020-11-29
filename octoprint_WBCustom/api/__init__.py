@@ -27,10 +27,9 @@ class WBCustomApi(octoprint.plugin.BlueprintPlugin):
         nm = networkManager()
 
         return jsonify({
-            'teste': 'teste'
-            #'networks': nm.getActiveConnections()
-            #'networkDeviceInfo': nm.networkDeviceInfo,
-            #'hasWifi': nm.hasWifi(),
-            #'storedWifiNetworks': nm.storedWifiNetworks()
+            'networks': nm.getActiveConnections()
+            'networkDeviceInfo': nm.networkDeviceInfo,
+            'hasWifi': nm.hasWifi(),
+            'storedWifiNetworks': nm.storedWifiNetworks()
 
         })
