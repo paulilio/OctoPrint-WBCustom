@@ -10,9 +10,9 @@ import socket, subprocess
 
 from sys import platform
 
-#from octoprint.settings import settings
+from octoprint.settings import settings
 #from octoprint_WBCustom.astroprint.config import settings
-from octoprint_WBCustom.astroprint.settings import settings
+#from octoprint_WBCustom.astroprint.settings import settings
 from octoprint_WBCustom.astroprint.ro_config import roConfig
 
 from .ssl import SslManager
