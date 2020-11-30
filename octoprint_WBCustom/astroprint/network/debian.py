@@ -322,6 +322,8 @@ class DebianNetworkManager(NetworkManagerBase):
     def getWifiNetworks(self):
         wifiDevice = self._activeWifiDevice
 
+        logger.info("wifiDevice [%s]" % wifiDevice)
+
         networks = {}
 
         if wifiDevice:
