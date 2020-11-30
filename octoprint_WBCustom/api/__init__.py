@@ -34,13 +34,12 @@ class WBCustomApi(octoprint.plugin.BlueprintPlugin):
 
         })
 
-	#@api.route("/settings/network/wifi-networks", methods=["GET"])
-	#@restricted_access
-	@octoprint.plugin.BlueprintPlugin.route("/wifi-networks", methods=["GET"])
-	def getWifiNetworks():
-		networks = networkManager().getWifiNetworks()
+    #@api.route("/settings/network/wifi-networks", methods=["GET"])
+    @octoprint.plugin.BlueprintPlugin.route("/wifi-networks", methods=["GET"])
+    def getWifiNetworks():
+        networks = networkManager().getWifiNetworks()
 
-		if networks:
-			return jsonify(networks = networks)
-		else:
-			return jsonify({'message': "Unable to get WiFi networks"})
+        if networks:
+            return jsonify(networks = networks)
+        else:
+            return jsonify({'message': "Unable to get WiFi networks"})
