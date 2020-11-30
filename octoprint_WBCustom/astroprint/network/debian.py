@@ -346,7 +346,8 @@ class DebianNetworkManager(NetworkManagerBase):
                 except NetworkManager.ObjectVanished:
                     pass
 
-            return [v for k,v in networks.iteritems()]
+            #return [v for k,v in networks.iteritems()]
+			return [v for k,v in networks.items()]
 
         return None
 
