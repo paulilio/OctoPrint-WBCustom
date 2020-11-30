@@ -347,7 +347,7 @@ class DebianNetworkManager(NetworkManagerBase):
                     pass
 
             #return [v for k,v in networks.iteritems()]
-			return [v for k,v in networks.items()]
+            return [v for k,v in networks.items()]
 
         return None
 
