@@ -33,3 +33,14 @@ class WBCustomApi(octoprint.plugin.BlueprintPlugin):
             'storedWifiNetworks': nm.storedWifiNetworks()
 
         })
+
+	#@api.route("/settings/network/wifi-networks", methods=["GET"])
+	#@restricted_access
+	@octoprint.plugin.BlueprintPlugin.route("/wifi-networks", methods=["GET"])
+	def getWifiNetworks():
+		networks = networkManager().getWifiNetworks()
+
+		if networks:
+			return jsonify(networks = networks)
+		else:
+			return jsonify({'message': "Unable to get WiFi networks"})
