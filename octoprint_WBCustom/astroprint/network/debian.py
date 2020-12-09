@@ -300,8 +300,6 @@ class DebianNetworkManager(NetworkManagerBase):
     def startUp(self):
         logger.info("Starting communication with Network Manager - version [%s]" % self._nm.NetworkManager.Version )
 
-        os.environ['SCAN_COUNT'] = "0"
-
         #Find out and set the active WiFi Device
         self._activeWifiDevice = self._getWifiDevice()
         self._eventListener.start()
@@ -331,7 +329,7 @@ class DebianNetworkManager(NetworkManagerBase):
         if wifiDevice:
             wifiDevice.RequestScan(options=dict())
             logger.info("ScanCount [%s]" % os.getenv('SCAN_COUNT'))
-            os.environ['API_USER']  = "1"
+            os.environ['API_USER']  = str(1 + int(os.environ['API_USER']))
             for ap in wifiDevice.GetAccessPoints():
                 try:
                     signal = ap.Strength
