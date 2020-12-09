@@ -330,39 +330,28 @@ class DebianNetworkManager(NetworkManagerBase):
 
         if wifiDevice:
             
+            #Tentativa de resolver o problema RequestScan scan periodic
             os.environ['SCAN_COUNT']  = str(1 + int((os.environ.get('SCAN_COUNT') if os.environ.get('SCAN_COUNT') is not None else 0)))
-            if int(os.environ.get('SCAN_COUNT')) > 1:
+            if int(os.environ.get('SCAN_COUNT')) > 3:
                 time.sleep(10) 
-            wifiDevice.RequestScan(options=dict())
-
-            #logger.info("ScanCount [%s]" % os.getenv('SCAN_COUNT'))
-            #if environ.get('Foo') is not None:
-
-            
-            #os.environ['SCAN_COUNT']  = str(1 + int(os.getenv['SCAN_COUNT']))
-            #logger.info("ScanCount [%s]" % os.getenv('SCAN_COUNT'))
-                
-
-            #if os.environ.get('SCAN_COUNT') is not None:
-            #    self._countScan = os.getenv['SCAN_COUNT']
-            #logger.info("ScanCount [%s]" %self._countScan)
+                wifiDevice.RequestScan(options=dict())
 
             for ap in wifiDevice.GetAccessPoints():
                 try:
                     signal = ap.Strength
                     ssid = ap.Ssid
 
-                    #if ap.Ssid not in networks or signal > networks[ssid]['signal']:
-                    wpaSecured = True if ap.WpaFlags or ap.RsnFlags else False
-                    wepSecured = not wpaSecured and ap.Flags == NetworkManager.NM_802_11_AP_FLAGS_PRIVACY
+                    if ap.Ssid not in networks or signal > networks[ssid]['signal']:
+                        wpaSecured = True if ap.WpaFlags or ap.RsnFlags else False
+                        wepSecured = not wpaSecured and ap.Flags == NetworkManager.NM_802_11_AP_FLAGS_PRIVACY
 
-                    networks[ssid] = {
-                        'id': ap.HwAddress,
-                        'signal': signal,
-                        'name': ssid,
-                        'secured': wpaSecured or wepSecured,
-                        'wep': wepSecured
-                    }
+                        networks[ssid] = {
+                            'id': ap.HwAddress,
+                            'signal': signal,
+                            'name': ssid,
+                            'secured': wpaSecured or wepSecured,
+                            'wep': wepSecured
+                        }
                 except NetworkManager.ObjectVanished:
                     pass
 
