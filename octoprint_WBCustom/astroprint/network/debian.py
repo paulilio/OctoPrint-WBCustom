@@ -336,7 +336,7 @@ class DebianNetworkManager(NetworkManagerBase):
             os.environ['SCAN_COUNT']  = str(1 + int((os.environ.get('SCAN_COUNT') if os.environ.get('SCAN_COUNT') is not None else 0)))
             #os.environ['SCAN_COUNT']  = str(1 + int(os.getenv['SCAN_COUNT']))
             #logger.info("ScanCount [%s]" % os.getenv('SCAN_COUNT'))
-            if environ.get('SCAN_COUNT') > 1:
+            if os.environ.get('SCAN_COUNT') > 1:
                 time.sleep(7)
 
             #if os.environ.get('SCAN_COUNT') is not None:
