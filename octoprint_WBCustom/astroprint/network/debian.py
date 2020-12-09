@@ -332,7 +332,7 @@ class DebianNetworkManager(NetworkManagerBase):
                     signal = ap.Strength
                     ssid = ap.Ssid
 
-                    if ap.Ssid not in networks or signal > networks[ssid]['signal']:
+                    #if ap.Ssid not in networks or signal > networks[ssid]['signal']:
                         wpaSecured = True if ap.WpaFlags or ap.RsnFlags else False
                         wepSecured = not wpaSecured and ap.Flags == NetworkManager.NM_802_11_AP_FLAGS_PRIVACY
 
