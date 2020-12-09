@@ -330,7 +330,7 @@ class DebianNetworkManager(NetworkManagerBase):
 
         if wifiDevice:
             
-            #Tentativa de resolver o problema RequestScan scan periodic. Não é a melhor solução.
+            #Tentativa de resolver o problema RequestScan scan periodic. Não é a melhor solução!
             os.environ['SCAN_COUNT']  = str(1 + int((os.environ.get('SCAN_COUNT') if os.environ.get('SCAN_COUNT') is not None else 0)))
             if int(os.environ.get('SCAN_COUNT')) > 1:
                 time.sleep(10) 

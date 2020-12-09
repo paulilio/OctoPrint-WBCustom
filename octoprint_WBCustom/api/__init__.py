@@ -30,7 +30,8 @@ class WBCustomApi(octoprint.plugin.BlueprintPlugin):
             'networks': nm.getActiveConnections(),
             'networkDeviceInfo': nm.networkDeviceInfo,
             'hasWifi': nm.hasWifi(),
-            'storedWifiNetworks': nm.storedWifiNetworks()
+            'storedWifiNetworks': nm.storedWifiNetworks(),
+            'activeConnections': nm.getActiveConnections()
 
         })
 
