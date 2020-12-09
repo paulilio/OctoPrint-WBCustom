@@ -331,7 +331,8 @@ class DebianNetworkManager(NetworkManagerBase):
             #logger.info("ScanCount [%s]" % os.getenv('SCAN_COUNT'))
             #if environ.get('Foo') is not None:
 
-            os.environ['SCAN_COUNT']  = str(1 + int((os.getenv['SCAN_COUNT'] if os.getenv('SCAN_COUNT')is not Note else 0)))
+            #os.environ['SCAN_COUNT']  = str(1 + int((os.getenv['SCAN_COUNT'] if os.getenv('SCAN_COUNT')is not Note else 0)))
+            os.environ['SCAN_COUNT']  = str(1 + int(os.getenv['SCAN_COUNT']))
             logger.info("ScanCount [%s]" % os.getenv('SCAN_COUNT'))
 
             for ap in wifiDevice.GetAccessPoints():
