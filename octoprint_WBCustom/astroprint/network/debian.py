@@ -331,9 +331,9 @@ class DebianNetworkManager(NetworkManagerBase):
         if wifiDevice:
             
             os.environ['SCAN_COUNT']  = str(1 + int((os.environ.get('SCAN_COUNT') if os.environ.get('SCAN_COUNT') is not None else 0)))
-            if int(os.environ.get('SCAN_COUNT')) > 1:
-                time.sleep(7) 
-            wifiDevice.RequestScan(options=dict())
+            if int(os.environ.get('SCAN_COUNT')) > 3:
+                time.sleep(4) 
+                wifiDevice.RequestScan(options=dict())
 
             #logger.info("ScanCount [%s]" % os.getenv('SCAN_COUNT'))
             #if environ.get('Foo') is not None:
