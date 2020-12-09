@@ -327,6 +327,7 @@ class DebianNetworkManager(NetworkManagerBase):
         networks = {}
 
         if wifiDevice:
+            wifiDevice.RequestScan(options=dict())
             for ap in wifiDevice.GetAccessPoints():
                 try:
                     signal = ap.Strength
