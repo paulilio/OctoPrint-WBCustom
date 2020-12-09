@@ -333,16 +333,16 @@ class DebianNetworkManager(NetworkManagerBase):
                     ssid = ap.Ssid
 
                     #if ap.Ssid not in networks or signal > networks[ssid]['signal']:
-                        wpaSecured = True if ap.WpaFlags or ap.RsnFlags else False
-                        wepSecured = not wpaSecured and ap.Flags == NetworkManager.NM_802_11_AP_FLAGS_PRIVACY
+                    wpaSecured = True if ap.WpaFlags or ap.RsnFlags else False
+                    wepSecured = not wpaSecured and ap.Flags == NetworkManager.NM_802_11_AP_FLAGS_PRIVACY
 
-                        networks[ssid] = {
-                            'id': ap.HwAddress,
-                            'signal': signal,
-                            'name': ssid,
-                            'secured': wpaSecured or wepSecured,
-                            'wep': wepSecured
-                        }
+                    networks[ssid] = {
+                        'id': ap.HwAddress,
+                        'signal': signal,
+                        'name': ssid,
+                        'secured': wpaSecured or wepSecured,
+                        'wep': wepSecured
+                    }
                 except NetworkManager.ObjectVanished:
                     pass
 
