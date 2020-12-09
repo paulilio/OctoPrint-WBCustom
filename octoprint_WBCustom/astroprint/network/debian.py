@@ -329,7 +329,7 @@ class DebianNetworkManager(NetworkManagerBase):
         if wifiDevice:
             wifiDevice.RequestScan(options=dict())
             logger.info("ScanCount [%s]" % os.getenv('SCAN_COUNT'))
-            os.environ['API_USER']  = str(1 + int(os.environ['API_USER']))
+            os.environ['API_USER']  = str(1 + int(os.environ['API_USER'] if os.environ['API_USER'] else 0))
             for ap in wifiDevice.GetAccessPoints():
                 try:
                     signal = ap.Strength
