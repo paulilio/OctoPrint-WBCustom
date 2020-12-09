@@ -297,6 +297,8 @@ class DebianNetworkManager(NetworkManagerBase):
         self._startHotspotCondition = threading.Condition()
         self._hostname = None
 
+        self._countScan = 0
+
     def startUp(self):
         logger.info("Starting communication with Network Manager - version [%s]" % self._nm.NetworkManager.Version )
 
@@ -332,8 +334,11 @@ class DebianNetworkManager(NetworkManagerBase):
             #if environ.get('Foo') is not None:
 
             #os.environ['SCAN_COUNT']  = str(1 + int((os.getenv['SCAN_COUNT'] if os.getenv('SCAN_COUNT')is not Note else 0)))
-            os.environ['SCAN_COUNT']  = str(1 + int(os.getenv['SCAN_COUNT']))
-            logger.info("ScanCount [%s]" % os.getenv('SCAN_COUNT'))
+            #os.environ['SCAN_COUNT']  = str(1 + int(os.getenv['SCAN_COUNT']))
+            #logger.info("ScanCount [%s]" % os.getenv('SCAN_COUNT'))
+
+            self._countScan = os.getenv['SCAN_COUNT']
+            logger.info("ScanCount [%s]" %self._countScan)
 
             for ap in wifiDevice.GetAccessPoints():
                 try:
