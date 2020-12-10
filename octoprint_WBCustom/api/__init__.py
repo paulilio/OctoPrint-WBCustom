@@ -28,8 +28,8 @@ class WBCustomApi(octoprint.plugin.BlueprintPlugin):
 
         return jsonify({
             'networks': nm.getWifiNetworks(),
-            'activeConnections': nm.getActiveConnections()
-
+            'activeConnections': nm.getActiveConnections(),
+            'networkDeviceInfo': nm.networkDeviceInfo,
         })
 
     #@api.route("/settings/network/wifi-networks", methods=["GET"])
