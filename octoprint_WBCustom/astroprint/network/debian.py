@@ -392,7 +392,6 @@ class DebianNetworkManager(NetworkManagerBase):
                                     'name': ap.Ssid,
                                     'ip': self._getIpAddress(d),
                                     'mac': self._getMacAddress(d),
-                                    'interface': self._getWifiDevice(),
                                     'secured': wpaSecured or wepSecured,
                                     'wep': wepSecured
                                 }
