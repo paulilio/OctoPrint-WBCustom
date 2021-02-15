@@ -410,6 +410,8 @@ class DebianNetworkManager(NetworkManagerBase):
     def setWifiNetwork(self, bssid, password = None):
         wifiDevice = self._activeWifiDevice
 
+        logger.info('SET-WIFI %s' % wifiDevice)
+
         if bssid and wifiDevice:
             accessPoint = None
 
