@@ -59,7 +59,6 @@ class WBCustomApi(octoprint.plugin.BlueprintPlugin):
         else:
             return jsonify({'message': "Unable to get WiFi networks"})
 
-    #@api.route("/settings/network/active", methods=["POST"])
     @octoprint.plugin.BlueprintPlugin.route("/active", methods=["POST"])
     def setWifiNetwork():
 	    if "application/json" in request.headers["Content-Type"]:
@@ -73,6 +72,6 @@ class WBCustomApi(octoprint.plugin.BlueprintPlugin):
 			    if result:
     				return jsonify(result)
 			    else:
-    				return ("Network %s not found" % data['id'], 404)
+                    return jsonify({'message': "Network %s not found" % data['id']})
 
-	    return ("Invalid Request", 400)
+	    return jsonify({'message': "Invalid Request"})
