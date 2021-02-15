@@ -69,6 +69,7 @@ class WBCustomApi(octoprint.plugin.BlueprintPlugin):
                     logger.info('SET-WIFI result: %s' % result)
                     return jsonify(result)
                 else:
+                    logger.info('SET-WIFI problem: %s' % result)
                     return jsonify({'message': "Network %s not found" % data['id']})
 
         return jsonify({'message': "Invalid Request"})
