@@ -63,9 +63,8 @@ class WBCustomApi(octoprint.plugin.BlueprintPlugin):
     def setWifiNetwork(self):
         if "application/json" in request.headers["Content-Type"]:
             data = request.json
-            networks = nm.getWifiNetworks()
             if 'id' in data and 'password' in data:
-                result = networks.setWifiNetwork(data['id'], data['password'])
+                result =  networkManager().setWifiNetwork(data['id'], data['password'])
                 if result:
                     return jsonify(result)
                 else:
