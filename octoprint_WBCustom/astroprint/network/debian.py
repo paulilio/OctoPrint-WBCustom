@@ -411,6 +411,7 @@ class DebianNetworkManager(NetworkManagerBase):
         wifiDevice = self._activeWifiDevice
 
         logger.info('SET-WIFI %s' % wifiDevice)
+        logger.info('SET-WIFI bssid: %s' % bssid)
 
         if bssid and wifiDevice:
             accessPoint = None
@@ -426,6 +427,9 @@ class DebianNetworkManager(NetworkManagerBase):
                 options = {}
                 for c in self._nm.Settings.ListConnections():
                     currentOptions = c.GetSettings()
+
+                    logger.info('SET-WIFI listConn: %s' % currentOptions['connection']['id'])
+
                     if currentOptions['connection']['id'] == ssid:
                         options = currentOptions
                         #these are empty and cause trouble when putting it back
