@@ -462,16 +462,16 @@ class DebianNetworkManager(NetworkManagerBase):
                         logger.info('SET-WIFI ACTIVE: %s' % activeConnection)
 
                         #try:
-                            if connection == activeConnection.Connection and activeConnection.State > 0:
-                                logger.info('SET-WIFI STATE: 0')
-                                return {
-                                    'name': ssid,
-                                    'id': accessPoint.HwAddress,
-                                    'signal': accessPoint.Strength,
-                                    'ip': None,
-                                    'secured': password is not None,
-                                    'wep': False
-                                }
+                        if connection == activeConnection.Connection and activeConnection.State > 0:
+                            logger.info('SET-WIFI STATE: 0')
+                            return {
+                                'name': ssid,
+                                'id': accessPoint.HwAddress,
+                                'signal': accessPoint.Strength,
+                                'ip': None,
+                                'secured': password is not None,
+                                'wep': False
+                            }
 
                         #except NetworkManager.ObjectVanished:
                         #    pass
