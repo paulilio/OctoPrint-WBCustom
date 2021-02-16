@@ -461,8 +461,8 @@ class DebianNetworkManager(NetworkManagerBase):
                         activeConnection = self._nm.NetworkManager.ActivateConnection(connection, wifiDevice, accessPoint)
                         logger.info('SET-WIFI ACTIVE: %s' % activeConnection)
 
-                        try:
-                            if connection == activeConnection.Connection and activeConnection.State > 0:
+                        #try:
+                        #    if connection == activeConnection.Connection and activeConnection.State > 0:
                                 logger.info('SET-WIFI STATE: 0')
                                 return {
                                     'name': ssid,
@@ -473,8 +473,8 @@ class DebianNetworkManager(NetworkManagerBase):
                                     'wep': False
                                 }
 
-                        except NetworkManager.ObjectVanished:
-                            pass
+                        #except NetworkManager.ObjectVanished:
+                        #    pass
 
                         #except Exception as e:
                         #    logger.warn("The Connection couldn't be activated: %s" % e)
