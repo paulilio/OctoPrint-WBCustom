@@ -475,10 +475,13 @@ class DebianNetworkManager(NetworkManagerBase):
 
                         except NetworkManager.ObjectVanished:
                             pass
+                        except Exception as e:
+                            logger.warn("The Connection couldn't be activated: %s" % e)
+                            return "The Connection couldn't be activated: %s" % e
 
                         ### The Connection couldn't be activated. Delete it
-                        logger.info('SET-WIFI COUNDT')
-                        return None
+                        #logger.info('SET-WIFI COUNDT')
+                        #return None
 
                     else:
                         logger.info('SET-WIFI HAS NOCON')
