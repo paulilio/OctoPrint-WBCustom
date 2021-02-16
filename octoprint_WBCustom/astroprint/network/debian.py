@@ -462,7 +462,7 @@ class DebianNetworkManager(NetworkManagerBase):
                         logger.info('SET-WIFI ACTIVE: %s' % activeConnection)
 
                         #try:
-                        #    if connection == activeConnection.Connection and activeConnection.State > 0:
+                            if connection == activeConnection.Connection and activeConnection.State > 0:
                                 logger.info('SET-WIFI STATE: 0')
                                 return {
                                     'name': ssid,
