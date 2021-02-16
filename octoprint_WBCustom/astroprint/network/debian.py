@@ -435,8 +435,8 @@ class DebianNetworkManager(NetworkManagerBase):
 
                         options = currentOptions
                         #these are empty and cause trouble when putting it back
-                        #if 'ipv6' in options:
-                        #    del options['ipv6']
+                        if 'ipv6' in options:
+                            del options['ipv6']
 
                         if 'ipv4' in options:
                             del options['ipv4']
