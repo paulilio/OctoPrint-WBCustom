@@ -482,7 +482,6 @@ class DebianNetworkManager(NetworkManagerBase):
 
                         ### The Connection couldn't be activated. Delete it
                         logger.warn("SET-WIFI The Connection couldn't be activated. Delete it")
-                        connection.Delete()
                         return None
 
                     else:
@@ -497,44 +496,44 @@ class DebianNetworkManager(NetworkManagerBase):
                             if connection == activeConnection.Connection and activeConnection.State > 0:
 
                                 logger.info('SET-WIFI STATE 0')
-								#remove mac address
-								settings = connection.GetSettings()
-								del settings['802-11-wireless']['mac-address']
+                                #remove mac address
+                                settings = connection.GetSettings()
+                                del settings['802-11-wireless']['mac-address']
 
-								try:
-									connection.Update(settings)
+                                try:
+                                    connection.Update(settings)
                                     logger.info('SET-WIFI UP')
-								except DBusException as e:
-									if e.get_dbus_name() != 'org.freedesktop.DBus.Error.NoReply': #Ignore the NoReply error in this operation
-										raise e
+                                except DBusException as e:
+                                    if e.get_dbus_name() != 'org.freedesktop.DBus.Error.NoReply': #Ignore the NoReply error in this operation
+                                        raise e
                                 logger.info('SET-WIFI RESULT')
-								return {
-									'name': ssid,
-									'id': accessPoint.HwAddress,
-									'signal': accessPoint.Strength,
-									'ip': None,
-									'secured': password is not None,
-									'wep': False
-								}
+                                return {
+                                    'name': ssid,
+                                    'id': accessPoint.HwAddress,
+                                    'signal': accessPoint.Strength,
+                                    'ip': None,
+                                    'secured': password is not None,
+                                    'wep': False
+                                }
 
                         except NetworkManager.ObjectVanished:
                             pass
 
                         ### The Connection couldn't be activated. Delete it
                         logger.info('SET-WIFI DEL')
-						connection.Delete()
-						return None
+                        connection.Delete()
+                        return None
 
 
-				except DBusException as e:
-					if e.get_dbus_name() == 'org.freedesktop.NetworkManager.InvalidProperty' and e.get_dbus_message() == 'psk':
-						return {
-							'err_code': 'invalid_psk',
-							'message': 'Invalid Password'
-						}
+                except DBusException as e:
+                    if e.get_dbus_name() == 'org.freedesktop.NetworkManager.InvalidProperty' and e.get_dbus_message() == 'psk':
+                        return {
+                            'err_code': 'invalid_psk',
+                            'message': 'Invalid Password'
+                        }
 
-					else:
-						raise
+                    else:
+                        raise
 
         return None
 
