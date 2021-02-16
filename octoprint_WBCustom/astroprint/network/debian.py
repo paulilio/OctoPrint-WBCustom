@@ -482,6 +482,7 @@ class DebianNetworkManager(NetworkManagerBase):
 
                         ### The Connection couldn't be activated. Delete it
                         logger.warn("SET-WIFI The Connection couldn't be activated. Delete it")
+                        connection.Delete()
                         return None
 
                     else:
