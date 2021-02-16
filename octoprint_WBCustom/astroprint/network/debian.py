@@ -431,6 +431,8 @@ class DebianNetworkManager(NetworkManagerBase):
                     logger.info('SET-WIFI listConn: %s' % currentOptions['connection']['id'])
 
                     if currentOptions['connection']['id'] == ssid:
+                        logger.info('SET-WIFI ACHOU: %s' % currentOptions['connection']['id'])
+
                         options = currentOptions
                         #these are empty and cause trouble when putting it back
                         #if 'ipv6' in options:
@@ -453,11 +455,15 @@ class DebianNetworkManager(NetworkManagerBase):
 
                 try:
                     if connection:
+                        logger.info('SET-WIFI HAS CON')
                         connection.Update(options)
+                        logger.info('SET-WIFI HAS UP')
                         activeConnection = self._nm.NetworkManager.ActivateConnection(connection, wifiDevice, accessPoint)
+                        logger.info('SET-WIFI ACTIVE: %s' % activeConnection)
 
                         try:
                             if connection == activeConnection.Connection and activeConnection.State > 0:
+                                logger.info('SET-WIFI STATE: 0')
                                 return {
                                     'name': ssid,
                                     'id': accessPoint.HwAddress,
@@ -471,27 +477,32 @@ class DebianNetworkManager(NetworkManagerBase):
                             pass
 
                         ### The Connection couldn't be activated. Delete it
+                        logger.info('SET-WIFI COUNDT')
                         return None
 
                     else:
+                        logger.info('SET-WIFI HAS NOCON')
                         options['connection'] = {
                             'id': ssid
                         }
                         (connection, activeConnection) = self._nm.NetworkManager.AddAndActivateConnection(options, wifiDevice, accessPoint)
-
+                        logger.info('SET-WIFI CON: %s' % connection)
+                        logger.info('SET-WIFI ACTIVE: %s' % activeConnection)
                         try:
                             if connection == activeConnection.Connection and activeConnection.State > 0:
 
+                                logger.info('SET-WIFI STATE 0')
                                 #remove mac address
                                 settings = connection.GetSettings()
                                 del settings['802-11-wireless']['mac-address']
 
                                 try:
                                     connection.Update(settings)
+                                    logger.info('SET-WIFI UP')
                                 except DBusException as e:
                                     if e.get_dbus_name() != 'org.freedesktop.DBus.Error.NoReply': #Ignore the NoReply error in this operation
                                         raise e
-
+                                logger.info('SET-WIFI RESULT')
                                 return {
                                     'name': ssid,
                                     'id': accessPoint.HwAddress,
@@ -505,6 +516,7 @@ class DebianNetworkManager(NetworkManagerBase):
                             pass
 
                         ### The Connection couldn't be activated. Delete it
+                        logger.info('SET-WIFI DEL')
                         connection.Delete()
                         return None
 
