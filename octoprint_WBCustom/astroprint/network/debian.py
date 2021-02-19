@@ -417,6 +417,11 @@ class DebianNetworkManager(NetworkManagerBase):
             accessPoint = None
 
             for ap in wifiDevice.GetAccessPoints():
+                if not ap.HwAddress:
+                    return {
+                        'err_code': 'wifi_hwaddress',
+                        'message': 'Erro de autenticação. Reveja as credenciais.'
+                    }
                 if ap.HwAddress == bssid:
                     accessPoint = ap
                     break
@@ -463,7 +468,6 @@ class DebianNetworkManager(NetworkManagerBase):
 
                         try:
                             if connection == activeConnection.Connection and activeConnection.State > 0:
-                                threading.Timer(3.0, logger.info('SET-WIFI STATE: 0')).start()
                                 return {
                                     'name': ssid,
                                     'id': accessPoint.HwAddress,
@@ -483,7 +487,10 @@ class DebianNetworkManager(NetworkManagerBase):
                         ### The Connection couldn't be activated. Delete it
                         logger.warn("SET-WIFI The Connection couldn't be activated. Delete it")
                         connection.Delete()
-                        return None
+                        return {
+                            'err_code': 'wifi_active1',
+                            'message': 'Não foi possível conectar-se a esta rede.'
+                        }
 
                     else:
                         logger.info('SET-WIFI HAS NOCON')
@@ -523,20 +530,26 @@ class DebianNetworkManager(NetworkManagerBase):
                         ### The Connection couldn't be activated. Delete it
                         logger.info('SET-WIFI DEL')
                         connection.Delete()
-                        return None
+                        return {
+                            'err_code': 'wifi_active_2',
+                            'message': 'Não foi possível conectar-se a esta rede.'
+                        }
 
 
                 except DBusException as e:
                     if e.get_dbus_name() == 'org.freedesktop.NetworkManager.InvalidProperty' and e.get_dbus_message() == 'psk':
                         return {
                             'err_code': 'invalid_psk',
-                            'message': 'Invalid Password'
+                            'message': 'Password inválido'
                         }
 
                     else:
                         raise
 
-        return None
+        return {
+            'err_code': 'wifi_active_3',
+            'message': 'Não foi possível conectar-se a esta rede.'
+        }
 
     def storedWifiNetworks(self):
         result = []
@@ -719,7 +732,7 @@ class DebianNetworkManager(NetworkManagerBase):
 
         for d in self._nm.Device.all():
             # Return the first MANAGED device that's a WiFi
-            if isinstance(d, self._nm.Wireless) and d.Managed:
+            if isinstanpice(d, self._nm.Wireless) and d.Managed:
                 wifiDevices.append(d)
 
         if wifiDevices:
