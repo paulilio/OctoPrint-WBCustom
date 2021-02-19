@@ -418,10 +418,7 @@ class DebianNetworkManager(NetworkManagerBase):
 
             for ap in wifiDevice.GetAccessPoints():
                 if not ap.HwAddress:
-                    return {
-                        'err_code': 'wifi_hwaddress',
-                        'message': 'Erro de autenticação. Reveja as credenciais.'
-                    }
+                    break
                 if ap.HwAddress == bssid:
                     accessPoint = ap
                     break
