@@ -417,8 +417,6 @@ class DebianNetworkManager(NetworkManagerBase):
             accessPoint = None
 
             for ap in wifiDevice.GetAccessPoints():
-                if not ap.HwAddress:
-                    break
                 if ap.HwAddress == bssid:
                     accessPoint = ap
                     break
