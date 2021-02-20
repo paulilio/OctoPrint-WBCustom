@@ -8,6 +8,7 @@ import sarge
 import os
 import threading
 import time
+import nmcli
 
 import octoprint_WBCustom.ext.pynetworkmanager.NetworkManager as NetworkManager
 
