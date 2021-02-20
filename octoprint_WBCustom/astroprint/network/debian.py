@@ -555,7 +555,7 @@ class DebianNetworkManager(NetworkManagerBase):
                     nmcli.connection.delete(ssid)
                 except nmcli._exception.NotExistException:
                     pass
-                for n in range(10):
+                for n in range(4):
                     try:
                         nmcli.connection.delete(ssid + ' %s' % n)
                     except nmcli._exception.NotExistException:
@@ -581,12 +581,12 @@ class DebianNetworkManager(NetworkManagerBase):
                 #ip = ni.ifaddresses('wlan0')[ni.AF_INET][0]['addr']
                 #print ip  # should print "192.168.100.37"
                 #d = self.getActiveConnectionDevice(self._activatingConnection)
+                #'id': accessPoint.HwAddress,
 
                 return {
                     'name': ssid,
-                    'id': accessPoint.HwAddress,
-                    'signal': accessPoint.Strength,
                     'ip': self._getIpAddress(wifiDevice),
+                    'signal': accessPoint.Strength,
                     'secured': password is not None,
                     'wep': False
                 }
