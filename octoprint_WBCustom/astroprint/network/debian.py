@@ -585,7 +585,7 @@ class DebianNetworkManager(NetworkManagerBase):
                     'name': ssid,
                     'id': accessPoint.HwAddress,
                     'signal': accessPoint.Strength,
-                    'ip': self._getIpAddress(d),
+                    'ip': self._getIpAddress(wifiDevice[0]),
                     'secured': password is not None,
                     'wep': False
                 }
