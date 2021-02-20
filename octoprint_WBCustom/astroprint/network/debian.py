@@ -547,10 +547,18 @@ class DebianNetworkManager(NetworkManagerBase):
         if ssid and wifiDevice:
 
             try:
-                nmcli.connection.delete(ssid)
-                nmcli.connection.delete('%s 2' % ssid)
-                nmcli.connection.delete('%s 1' % ssid)
-                nmcli.connection.delete('%s' % ssid)
+                
+                try:
+                    nmcli.connection.delete(ssid)
+                except nmcli._exception.NotExistException:
+                    pass
+                for n in range(3):
+                    try:
+                        nmcli.connection.delete(ssid + ' ' + n)
+                    except nmcli._exception.NotExistException:
+                        pass
+
+
                 nmcli.disable_use_sudo()
                 nmcli.device.wifi_connect(ssid, password)
                 nmcli.connection.modify(ssid, {
