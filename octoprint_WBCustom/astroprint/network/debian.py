@@ -555,7 +555,7 @@ class DebianNetworkManager(NetworkManagerBase):
                     nmcli.connection.delete(ssid)
                 except nmcli._exception.NotExistException:
                     pass
-                for n in range(3):
+                for n in range(10):
                     try:
                         nmcli.connection.delete(ssid + ' %s' % n)
                     except nmcli._exception.NotExistException:
