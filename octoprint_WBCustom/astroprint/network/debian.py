@@ -560,10 +560,8 @@ class DebianNetworkManager(NetworkManagerBase):
                         nmcli.connection.delete(ssid + ' %s' % n)
                     except nmcli._exception.NotExistException:
                         pass
-
-
                 
-                #nmcli.device.wifi_connect(ssid, password)
+                nmcli.device.wifi_connect(ssid, password)
                 #nmcli.connection.modify(ssid, {
                 #    'ipv4.addresses': '192.168.1.1/24',
                 #    'ipv4.gateway': '192.168.1.255',
