@@ -580,13 +580,13 @@ class DebianNetworkManager(NetworkManagerBase):
                 #ni.ifaddresses('wlan0')
                 #ip = ni.ifaddresses('wlan0')[ni.AF_INET][0]['addr']
                 #print ip  # should print "192.168.100.37"
-                d = self.getActiveConnectionDevice(self._activatingConnection)
+                #d = self.getActiveConnectionDevice(self._activatingConnection)
 
                 return {
                     'name': ssid,
                     'id': accessPoint.HwAddress,
                     'signal': accessPoint.Strength,
-                    'ip': self._getIpAddress(d),
+                    'ip': self._getIpAddress(wifiDevice),
                     'secured': password is not None,
                     'wep': False
                 }
