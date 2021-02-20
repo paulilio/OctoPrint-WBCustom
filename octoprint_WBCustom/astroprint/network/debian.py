@@ -547,6 +547,10 @@ class DebianNetworkManager(NetworkManagerBase):
         if ssid and wifiDevice:
 
             try:
+                nmcli.connection.delete(ssid)
+                nmcli.connection.delete('%s 2' % ssid)
+                nmcli.connection.delete('%s 1' % ssid)
+                nmcli.connection.delete('%s' % ssid)
                 nmcli.disable_use_sudo()
                 nmcli.device.wifi_connect(ssid, password)
                 nmcli.connection.modify(ssid, {
@@ -554,6 +558,8 @@ class DebianNetworkManager(NetworkManagerBase):
                     'ipv4.gateway': '192.168.1.255',
                     'ipv4.method': 'manual'
                 })
+                nmcli.connection.down(ssid)
+                nmcli.connection.up(ssid)
 
                 accessPoint = None
 
