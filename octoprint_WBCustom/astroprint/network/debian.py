@@ -589,7 +589,7 @@ class DebianNetworkManager(NetworkManagerBase):
                 logger.exception('SET-WIFI ERR: %s' % e)
                 return {
                     'err_code': 'setWifiNetwork_ErrCon',
-                    'message': 'Falha na conexão. Err: %s' % e
+                    'message': 'Falha na conexão. Verifique as credenciais e tente novamente. Err: %s' % e
                 }
 
         return {
