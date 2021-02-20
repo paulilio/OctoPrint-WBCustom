@@ -549,6 +549,8 @@ class DebianNetworkManager(NetworkManagerBase):
 
             try:
 
+                nmcli.disable_use_sudo()
+
                 try:
                     nmcli.connection.delete(ssid)
                 except nmcli._exception.NotExistException:
@@ -560,15 +562,15 @@ class DebianNetworkManager(NetworkManagerBase):
                         pass
 
 
-                nmcli.disable_use_sudo()
-                nmcli.device.wifi_connect(ssid, password)
-                nmcli.connection.modify(ssid, {
-                    'ipv4.addresses': '192.168.1.1/24',
-                    'ipv4.gateway': '192.168.1.255',
-                    'ipv4.method': 'manual'
-                })
-                nmcli.connection.down(ssid)
-                nmcli.connection.up(ssid)
+                
+                #nmcli.device.wifi_connect(ssid, password)
+                #nmcli.connection.modify(ssid, {
+                #    'ipv4.addresses': '192.168.1.1/24',
+                #    'ipv4.gateway': '192.168.1.255',
+                #    'ipv4.method': 'manual'
+                #})
+                #nmcli.connection.down(ssid)
+                #nmcli.connection.up(ssid)
 
                 accessPoint = None
 
