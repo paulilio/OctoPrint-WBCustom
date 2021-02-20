@@ -547,14 +547,14 @@ class DebianNetworkManager(NetworkManagerBase):
         if ssid and wifiDevice:
 
             try:
-                
+
                 try:
                     nmcli.connection.delete(ssid)
                 except nmcli._exception.NotExistException:
                     pass
                 for n in range(3):
                     try:
-                        nmcli.connection.delete(ssid + ' ' + n)
+                        nmcli.connection.delete(ssid + ' %s' % n)
                     except nmcli._exception.NotExistException:
                         pass
 
