@@ -482,10 +482,7 @@ class DebianNetworkManager(NetworkManagerBase):
                         ### The Connection couldn't be activated. Delete it
                         logger.warn("SET-WIFI The Connection couldn't be activated. Delete it")
                         connection.Delete()
-                        return {
-                            'err_code': 'wifi_active1',
-                            'message': 'Não foi possível conectar-se a esta rede.'
-                        }
+                        return None
 
                     else:
                         logger.info('SET-WIFI HAS NOCON')
@@ -525,24 +522,62 @@ class DebianNetworkManager(NetworkManagerBase):
                         ### The Connection couldn't be activated. Delete it
                         logger.info('SET-WIFI DEL')
                         connection.Delete()
-                        return {
-                            'err_code': 'wifi_active_2',
-                            'message': 'Não foi possível conectar-se a esta rede.'
-                        }
+                        return None
 
 
                 except DBusException as e:
                     if e.get_dbus_name() == 'org.freedesktop.NetworkManager.InvalidProperty' and e.get_dbus_message() == 'psk':
                         return {
                             'err_code': 'invalid_psk',
-                            'message': 'Password inválido'
+                            'message': 'Invalid Password'
                         }
 
                     else:
                         raise
 
+        return None
+
+    def setWifiNetwork2(self, ssid, password = None):
+        wifiDevice = self._activeWifiDevice
+
+        logger.info('SET-WIFI %s' % wifiDevice)
+        logger.info('SET-WIFI bssid: %s' % ssid)
+
+        if ssid and wifiDevice:
+
+            try:
+                nmcli.device.wifi_connect('AP1', 'passphrase')
+                nmcli.connection.modify('AP1', {
+                    'ipv4.addresses': '192.168.1.1/24',
+                    'ipv4.gateway': '192.168.1.255',
+                    'ipv4.method': 'manual'
+                })
+
+                accessPoint = None
+
+                for ap in wifiDevice.GetAccessPoints():
+                    if ap.Ssid == ssid:
+                        accessPoint = ap
+                        break
+
+                return {
+                    'name': ssid,
+                    'id': accessPoint.HwAddress,
+                    'signal': accessPoint.Strength,
+                    'ip': None,
+                    'secured': password is not None,
+                    'wep': False
+                }
+
+            except Exception as e:
+                logger.exception('SET-WIFI ERR: %s' % e)
+                return {
+                    'err_code': 'setWifiNetwork_ErrCon',
+                    'message': 'Falha na conexão. Err: %s' % e
+                }
+
         return {
-            'err_code': 'wifi_active_3',
+            'err_code': 'setWifiNetwork_Unknown',
             'message': 'Não foi possível conectar-se a esta rede.'
         }
 
@@ -727,7 +762,7 @@ class DebianNetworkManager(NetworkManagerBase):
 
         for d in self._nm.Device.all():
             # Return the first MANAGED device that's a WiFi
-            if isinstanpice(d, self._nm.Wireless) and d.Managed:
+            if isinstance(d, self._nm.Wireless) and d.Managed:
                 wifiDevices.append(d)
 
         if wifiDevices:
