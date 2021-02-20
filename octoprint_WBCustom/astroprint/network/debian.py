@@ -577,15 +577,15 @@ class DebianNetworkManager(NetworkManagerBase):
                         accessPoint = ap
                         break
 
-                ni.ifaddresses('wlan0')
-                ip = ni.ifaddresses('wlan0')[ni.AF_INET][0]['addr']
+                #ni.ifaddresses('wlan0')
+                #ip = ni.ifaddresses('wlan0')[ni.AF_INET][0]['addr']
                 #print ip  # should print "192.168.100.37"
 
                 return {
                     'name': ssid,
                     'id': accessPoint.HwAddress,
                     'signal': accessPoint.Strength,
-                    'ip': ip,
+                    'ip': self._getIpAddress(d),
                     'secured': password is not None,
                     'wep': False
                 }
