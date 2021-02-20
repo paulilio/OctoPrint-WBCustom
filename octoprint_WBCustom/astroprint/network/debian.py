@@ -547,8 +547,9 @@ class DebianNetworkManager(NetworkManagerBase):
         if ssid and wifiDevice:
 
             try:
-                nmcli.device.wifi_connect('AP1', 'passphrase')
-                nmcli.connection.modify('AP1', {
+                nmcli.disable_use_sudo()
+                nmcli.device.wifi_connect(ssid, password)
+                nmcli.connection.modify(ssid, {
                     'ipv4.addresses': '192.168.1.1/24',
                     'ipv4.gateway': '192.168.1.255',
                     'ipv4.method': 'manual'
